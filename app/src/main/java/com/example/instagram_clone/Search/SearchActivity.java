@@ -1,22 +1,26 @@
-package com.example.instagram_clone;
+package com.example.instagram_clone.Search;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.instagram_clone.R;
 import com.example.instagram_clone.Utils.BottomNavigationViewHelper;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-public class HomeActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
+    private static final String TAG = "SearchActivity";
 
-    private static final String TAG = "HomeActivity";
+    private Context mContext = SearchActivity.this;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_home );
-        Log.d(TAG, "onCreate: starting.");
+        Log.d( TAG, "onCreate: started" );
 
         setupBottomNavigationView();
     }
@@ -28,5 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         Log.d(TAG, "setupBottomNavigationView: setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById( R.id.bottomNavViewBar );
         BottomNavigationViewHelper.setupBottomNavigationView( bottomNavigationViewEx );
+
+        BottomNavigationViewHelper.enableNavigation( mContext, bottomNavigationViewEx );
     }
 }
