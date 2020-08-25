@@ -38,11 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 Log.d( TAG, "onMenuItemClick: clicked menu item: " + item);
 
-                switch (item.getItemId()){
-                    case R.id.profileMenu:
-                    Log.d( TAG, "onMenuItemClick: Navigating to Profile Preferences." );
-                }
-
+//                switch (item.getItemId()){
+//                    case R.id.profileMenu:
+//                    Log.d( TAG, "onMenuItemClick: Navigating to Profile Preferences." );
+//                }
+//
                 return false;
             }
         } );
@@ -57,11 +57,5 @@ public class ProfileActivity extends AppCompatActivity {
         BottomNavigationViewHelper.setupBottomNavigationView( bottomNavigationViewEx );
 
         BottomNavigationViewHelper.enableNavigation( mContext, bottomNavigationViewEx );
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate( R.menu.profile_menu, menu );
-        return true;
     }
 }
