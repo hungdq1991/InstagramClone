@@ -3,6 +3,6 @@
     <string name="display_name">Hung</string>
     <string name="address">I live in HCM City, Viet Nam</string>
     <string name="target">https://codingforfaang.com</string>
-    <string name="edit_profile">Edit Profile</string>
-    <string name="sign_out">Sign Out</string>
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="sign_out_fragment">Sign Out</string>
 </resources>

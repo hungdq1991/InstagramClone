@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/relayout1">
+            android:id="@+id/reLayout1">
 
             <include layout="@layout/layout_top_tabs" />
         </RelativeLayout>
@@ -23,8 +23,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/relayout1"
-            android:id="@+id/relayout2">
+            android:layout_below="@id/reLayout1"
+            android:id="@+id/reLayout2">
 
             <include layout="@layout/layout_center_viewpager" />
         </RelativeLayout>
