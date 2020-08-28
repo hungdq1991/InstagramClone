@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -16,7 +17,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.instagram_clone.R;
 import com.example.instagram_clone.Utils.BottomNavigationViewHelper;
+import com.example.instagram_clone.Utils.GridImageAdapter;
+import com.example.instagram_clone.Utils.UniversalImageLoader;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivity";
@@ -25,6 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Context mContext = ProfileActivity.this;
 
     private ProgressBar mProgressBar;
+    private ImageView profilePhoto;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,10 +38,47 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView( R.layout.activity_profile );
         Log.d( TAG, "onCreate: started" );
 
-        mProgressBar = (ProgressBar) findViewById( R.id.profileProgressBar );
-        mProgressBar.setVisibility( View.GONE );
         setupBottomNavigationView();
         setupToolbar();
+        setupActivityWidgets();
+        settingProfileImage();
+
+        tempGridSetup();
+    }
+
+    private void tempGridSetup(){
+        ArrayList<String> imgURLs = new ArrayList<>(  );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+
+        setupImageGrid( imgURLs );
+    }
+
+    private void setupImageGrid(ArrayList<String> imgURLs)
+    {
+        GridView gridView = (GridView) findViewById( R.id.gridView );
+        GridImageAdapter adapter = new GridImageAdapter( mContext, R.layout.layout_grid_imageview, "", imgURLs);
+        gridView.setAdapter( adapter );
+    }
+
+    private void settingProfileImage()
+    {
+        Log.d( TAG, "settingProfileImage: setting profile photo." );
+        String imgURL = "drawable://" + R.drawable.profile_photo;
+        UniversalImageLoader.setImage( imgURL, profilePhoto, mProgressBar, "" );
+    }
+
+    private void setupActivityWidgets()
+    {
+        Log.d( TAG, "setupActivityWidgets: settingView." );
+        mProgressBar = (ProgressBar) findViewById( R.id.profileProgressBar );
+        mProgressBar.setVisibility( View.GONE );
+        profilePhoto = (ImageView) findViewById( R.id.profile_photo );
     }
 
     private void setupToolbar(){
