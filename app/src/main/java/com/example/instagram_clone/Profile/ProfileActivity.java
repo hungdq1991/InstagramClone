@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class ProfileActivity extends AppCompatActivity {
     private static final String TAG = "ProfileActivity";
     private static final int ACTIVITY_NUM = 4;
+    private static final int NUM_GRID_COLUMNS = 3;
 
     private Context mContext = ProfileActivity.this;
 
@@ -48,13 +49,22 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void tempGridSetup(){
         ArrayList<String> imgURLs = new ArrayList<>(  );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
-        imgURLs.add( "drawable://" + R.drawable.profile_photo );
+        imgURLs.add( "drawable://" + R.drawable.a_1 );
+        imgURLs.add( "drawable://" + R.drawable.a_2 );
+        imgURLs.add( "drawable://" + R.drawable.a_3 );
+        imgURLs.add( "drawable://" + R.drawable.a_4 );
+        imgURLs.add( "drawable://" + R.drawable.a_4 );
+        imgURLs.add( "drawable://" + R.drawable.a_3 );
+        imgURLs.add( "drawable://" + R.drawable.a_2 );
+        imgURLs.add( "drawable://" + R.drawable.a_1 );
+        imgURLs.add( "drawable://" + R.drawable.a_1 );
+        imgURLs.add( "drawable://" + R.drawable.a_2 );
+        imgURLs.add( "drawable://" + R.drawable.a_3 );
+        imgURLs.add( "drawable://" + R.drawable.a_4 );
+        imgURLs.add( "drawable://" + R.drawable.a_4 );
+        imgURLs.add( "drawable://" + R.drawable.a_3 );
+        imgURLs.add( "drawable://" + R.drawable.a_2 );
+        imgURLs.add( "drawable://" + R.drawable.a_1 );
 
         setupImageGrid( imgURLs );
     }
@@ -62,6 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
     private void setupImageGrid(ArrayList<String> imgURLs)
     {
         GridView gridView = (GridView) findViewById( R.id.gridView );
+
+        int gridWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageWidth = gridWidth / NUM_GRID_COLUMNS;
+
+        gridView.setColumnWidth( imageWidth );
         GridImageAdapter adapter = new GridImageAdapter( mContext, R.layout.layout_grid_imageview, "", imgURLs);
         gridView.setAdapter( adapter );
     }
