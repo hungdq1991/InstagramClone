@@ -4,16 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.instagram_clone.Login.LoginActivity;
 import com.example.instagram_clone.R;
 import com.example.instagram_clone.Utils.BottomNavigationViewHelper;
 import com.example.instagram_clone.Utils.SectionsPagerAdapter;
 import com.example.instagram_clone.Utils.UniversalImageLoader;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -22,11 +26,10 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     private static final int ACTIVITY_NUM = 0;
 
-    private static final int TAB_CAMERA = 0;
-    private static final int TAB_HOME = 0;
-    private static final int TAB_MESSAGE = 0;
-
     private Context mContext = HomeActivity.this;
+
+    //Firebase
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,44 @@ public class HomeActivity extends AppCompatActivity {
         setContentView( R.layout.activity_home );
         Log.d(TAG, "onCreate: starting.");
 
+        setupFirebaseAuth();
+
         initImageLoader();
         setupBottomNavigationView();
         setupViewPager();
+    }
+
+    /**
+     * ------------------------------------------Firebase------------------------------------------
+     */
+    /**
+     * Setup the firebase auth object
+     */
+    private void setupFirebaseAuth()
+    {
+        Log.d( TAG, "setupFirebaseAuth: setting up firebase auth." );
+
+        // [START initialize_auth]
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+
+        } else {
+            Intent intent = new Intent( mContext, LoginActivity.class );
+            startActivity( intent );
+        }
     }
 
     private void initImageLoader(){
