@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mContext = LoginActivity.this;
 
-        mProgressBar = (ProgressBar) findViewById( R.id.loginRequestLoadingProgressbar );
+        mProgressBar = (ProgressBar) findViewById( R.id.progressBar );
         mPleaseWait = (TextView) findViewById( R.id.pleaseWait );
         mEmail = (EditText) findViewById( R.id.input_email );
         mPassword = (EditText) findViewById( R.id.input_password );
@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * ------------------------------------------Firebase------------------------------------------
      */
-
     private void init()
     {
         //Initialize the button for logging in
