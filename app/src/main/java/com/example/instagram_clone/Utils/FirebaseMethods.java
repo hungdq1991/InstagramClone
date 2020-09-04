@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.instagram_clone.R;
 import com.example.instagram_clone.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,6 +14,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseMethods {
     private static final String TAG = "FirebaseMethods";
@@ -21,6 +24,8 @@ public class FirebaseMethods {
 
     //Firebase
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
     private String userID;
 
     public FirebaseMethods(Context mContext) {
@@ -33,22 +38,29 @@ public class FirebaseMethods {
         }
     }
 
-//    public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot)
-//    {
-//        Log.d( TAG, "checkIfUsernameExists: check if " + username + "already exists." );
-//
-//        User user = new User();
-//
-//        for(DataSnapshot ds:dataSnapshot.getChildren())
-//        {
-//            Log.d( TAG, "checkIfUsernameExists: dataSnapshot: " + ds);
-//
-//            user.setUsername( ds.getValue(User.class).getUsername() );
-//            Log.d( TAG, "checkIfUsernameExists: dataSnapshot: " + user.getUsername());
-//        }
-//    }
+    public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot)
+    {
+        Log.d( TAG, "checkIfUsernameExists: check if " + username + "already exists." );
 
-    /***
+        User user = new User();
+
+        for(DataSnapshot ds:dataSnapshot.getChildren())
+        {
+            Log.d( TAG, "checkIfUsernameExists: dataSnapshot: " + ds);
+
+            user.setUsername( ds.getValue(User.class).getUsername() );
+            Log.d( TAG, "checkIfUsernameExists: dataSnapshot: " + user.getUsername());
+
+            if(StringManipulation.expandUsername( user.getUsername()).equals( username ))
+            {
+                Log.d( TAG, "checkIfUsernameExists: FOUND A MATCH: " + user.getUsername());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Register a new email and password to Firebase Authentication
      * @param email
      * @param password
@@ -72,5 +84,14 @@ public class FirebaseMethods {
                     }
                 }
             });
+    }
+
+    public void addNewUser(String email, String username, String description, String website, String profile_photo)
+    {
+        User user = new User(userID, 1, email, StringManipulation.condenseUsername( username ));
+
+        myRef.child( mContext.getString( R.string.dbname_user) )
+                .child( userID )
+                .setValue( user );
     }
 }

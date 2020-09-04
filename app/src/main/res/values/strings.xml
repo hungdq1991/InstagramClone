@@ -3,15 +3,20 @@
     <string name="display_name">Hung</string>
     <string name="address">I live in HCM City, Viet Nam</string>
     <string name="target">https://codingforfaang.com</string>
-    <string name="edit_profile_fragment">Edit Profile</string>
-    <string name="sign_out_fragment">Sign Out</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
 
+    <!-- Fragment Names-->
+    <string name="edit_profile_fragment">Edit Profile</string>
+    <string name="sign_out_fragment">Sign Out</string>
+
     <!-- Firebase Message-->
     <string name="auth_failed">Failed to Authenticate</string>
     <string name="auth_success">Authentication Success</string>
 
+    <!-- Firebase Database fields-->
+    <string name="dbname_user">users</string>
+    <string name="dbname_user_account_settings">users_account_settings</string>
 </resources>
